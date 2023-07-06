@@ -26,6 +26,7 @@ if (typeof window !== 'undefined') {
                     colIndex,
                 },
             };
+            
             row.push(dot);
         }
         initialBoard.push(row);
@@ -53,9 +54,29 @@ const gameSlice = createSlice({
                 ...state,
                 selectedDots: [...state.selectedDots, dot],
             };
-        }
-            
-            
+        },
+        resetSelectedDots: (state) => {
+            return {
+                ...state,
+                selectedDots: [],
+            };
+        },
+        resolveSelectedDots: (state, action: PayloadAction<DotType[]>) => {
+            const eliminatedDots: DotType[] = action.payload;
+            const addScore = eliminatedDots.length * 2;
+
+            const newGameBoard: DotType[][] = state.gameBoard.map((row) => {
+                return row.filter((dot) => !eliminatedDots.some((eliminatedDot) => eliminatedDot.position.rowIndex === dot.position.rowIndex && eliminatedDot.position.colIndex === dot.position.colIndex)
+                );
+            });
+
+            return {
+                ...state,
+                gameBoard: newGameBoard,
+                score: state.score + addScore,
+                selectedDots: [],
+            };
+        }   
     },
 });
 
