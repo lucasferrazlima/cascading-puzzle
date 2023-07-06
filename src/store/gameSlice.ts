@@ -5,12 +5,35 @@ import { GameState } from "./types";
 import { Dot as DotType } from "./types";
 import { PayloadAction } from "@reduxjs/toolkit";
 
+const colors = ['red', 'green', 'yellow', 'purple'];
+
+const generateColor = (colors: string[]): string => {
+    const randomIndex = Math.floor(Math.random() * colors.length)
+    return colors[randomIndex]
+
+}
+
+const initialBoard: DotType[][] = [];
+
+if (typeof window !== 'undefined') {
+    for (let colIndex = 0; colIndex < 6; colIndex++) {
+        const row: DotType[] = [];
+        for (let rowIndex = 0; rowIndex < 6; rowIndex++) {
+            const dot: DotType = {
+                color: generateColor(colors),
+                position: {
+                    rowIndex,
+                    colIndex,
+                },
+            };
+            row.push(dot);
+        }
+        initialBoard.push(row);
+    }
+}
+
 const initialState: GameState = {
-    gameBoard: [
-        [{ color: 'red', position: { rowIndex: 0, colIndex: 0 } }, { color: 'blue', position: { rowIndex: 0, colIndex: 1 } }, { color: 'green', position: { rowIndex: 0, colIndex: 2 } }],
-        [{ color: 'yellow', position: { rowIndex: 1, colIndex: 0 } }, { color: 'purple', position: { rowIndex: 1, colIndex: 1 } }, { color: 'orange', position: { rowIndex: 1, colIndex: 2 } }],
-        [{ color: 'pink', position: { rowIndex: 2, colIndex: 0 } }, { color: 'teal', position: { rowIndex: 2, colIndex: 1 } }, { color: 'brown', position: { rowIndex: 2, colIndex: 2 } }],
-      ],
+    gameBoard: initialBoard,
     score: 0,
     isGameStarted: false,
     selectedDots: [],

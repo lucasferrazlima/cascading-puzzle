@@ -22,8 +22,7 @@
   
     // all plugins (eslint-plugin-xxx) go here:
     "plugins": [
-      "@typescript-eslint",
-      "@next/eslint-plugin-next" // https://github.com/vercel/next.js/blob/canary/packages/eslint-plugin-next/lib/index.js
+      "@typescript-eslint"
     ],
   
     // all configs (eslint-config-xxx) go here:

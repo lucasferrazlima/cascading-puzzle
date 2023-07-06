@@ -11,11 +11,11 @@ const GameBoard = () => {
     const board = useSelector((state: RootState) => state.game.gameBoard);
 
     return (
-        <div className='w-52 h-12 grid grid-cols-3 grid-rows-3'>
+        <div className='w-96 h-40 grid grid-cols-6 grid-rows-6'>
             {board.map((row, rowIndex) => (
                 <div key={rowIndex}>
                     {row.map((dot, colIndex) => (
-                        <Dot key={`${rowIndex}-${colIndex}`} dot={dot} />
+                        <Dot key={`${rowIndex}-${colIndex}`} dot={dot}  />
                     ))}
                 </div>
             ))}
