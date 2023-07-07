@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { GameState } from "./types";
 import { Dot as DotType } from "./types";
 import { PayloadAction } from "@reduxjs/toolkit";
+import handleCascadingEffect from "../utils/cascadingEffect";
 
 const colors = ['red', 'green', 'yellow', 'purple'];
 
@@ -13,7 +14,7 @@ const generateColor = (colors: string[]): string => {
 
 }
 
-const initialBoard: DotType[][] = [];
+const initialBoard: (DotType | null)[][] = [];
 
 if (typeof window !== 'undefined') {
     for (let colIndex = 0; colIndex < 6; colIndex++) {
@@ -65,14 +66,23 @@ const gameSlice = createSlice({
             const eliminatedDots: DotType[] = action.payload;
             const addScore = eliminatedDots.length * 2;
 
-            const newGameBoard: DotType[][] = state.gameBoard.map((row) => {
-                return row.filter((dot) => !eliminatedDots.some((eliminatedDot) => eliminatedDot.position.rowIndex === dot.position.rowIndex && eliminatedDot.position.colIndex === dot.position.colIndex)
-                );
-            });
+            const newGameBoard: (DotType | null)[][] = state.gameBoard.map((row) => {
+                return row.map((dot) => {
+                  const eliminatedDot = eliminatedDots.find(
+                    (eliminatedDot) =>
+                      eliminatedDot.position.rowIndex === dot.position.rowIndex &&
+                      eliminatedDot.position.colIndex === dot.position.colIndex
+                  );
+                  return eliminatedDot ? null : dot;
+                });
+              });
+
+            const updatedGameBoard = handleCascadingEffect(newGameBoard);
+
 
             return {
                 ...state,
-                gameBoard: newGameBoard,
+                gameBoard: updatedGameBoard,
                 score: state.score + addScore,
                 selectedDots: [],
             };

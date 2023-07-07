@@ -57,12 +57,12 @@ const handleMouseUp = () => {
 
   return (
     <div
-      style={{ backgroundColor: dot.color }}
+      style={{ backgroundColor: dot ? dot.color : 'transparent' }}
       onMouseDown={handleMouseDown}
       onMouseOver={handleSelect}
-        onMouseUp={handleMouseUp}
+      onMouseUp={handleMouseUp}
     >
-      {dot.color}
+      dot
     </div>
   );
 };
