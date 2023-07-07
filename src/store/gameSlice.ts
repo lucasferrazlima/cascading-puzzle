@@ -4,15 +4,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { GameState } from "./types";
 import { Dot as DotType } from "./types";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { generateColor } from "../utils/generateColors";
 import handleCascadingEffect from "../utils/cascadingEffect";
+import refillBoard from "../utils/refillBoard";
 
-const colors = ['red', 'green', 'yellow', 'purple'];
-
-const generateColor = (colors: string[]): string => {
-    const randomIndex = Math.floor(Math.random() * colors.length)
-    return colors[randomIndex]
-
-}
+const colors = ['red', 'green', 'yellow', 'purple', 'blue'];
 
 const initialBoard: (DotType | null)[][] = [];
 
@@ -70,8 +66,9 @@ const gameSlice = createSlice({
                 return row.map((dot) => {
                   const eliminatedDot = eliminatedDots.find(
                     (eliminatedDot) =>
-                      eliminatedDot.position.rowIndex === dot.position.rowIndex &&
-                      eliminatedDot.position.colIndex === dot.position.colIndex
+                        dot &&
+                        eliminatedDot.position.rowIndex === dot.position.rowIndex &&
+                        eliminatedDot.position.colIndex === dot.position.colIndex
                   );
                   return eliminatedDot ? null : dot;
                 });
@@ -79,10 +76,12 @@ const gameSlice = createSlice({
 
             const updatedGameBoard = handleCascadingEffect(newGameBoard);
 
+            const refilledGameboard = refillBoard(updatedGameBoard);
+
 
             return {
                 ...state,
-                gameBoard: updatedGameBoard,
+                gameBoard: refilledGameboard,
                 score: state.score + addScore,
                 selectedDots: [],
             };

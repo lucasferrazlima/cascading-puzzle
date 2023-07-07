@@ -4,7 +4,7 @@ import { RootState } from '../store';
 import { actions } from '../store/gameSlice';
 
 interface DotProps {
-  dot: DotType;
+  dot: DotType | null;
 }
 
 const Dot = ({ dot }: DotProps) => {
@@ -14,14 +14,14 @@ const Dot = ({ dot }: DotProps) => {
 
   const handleMouseDown = () => {
     // initially any dot can be selected
-    if (selectedDots.length === 0) {
+    if (selectedDots.length === 0 && dot) {
       dispatch(actions.selectDot(dot));
       console.log(`Dot of row ${dot.position.rowIndex} and col ${dot.position.colIndex} clicked!`);
     }
   };
 
   const handleSelect = () => {
-    if (selectedDots.length > 0) {
+    if (selectedDots.length > 0 && dot) {
       if (lastDot.color === dot.color) {
         // if the dot is adjacent to the last dot, it can be selected
         const isAdjacent =
