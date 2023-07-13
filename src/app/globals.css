@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 body {
-  background-color: gainsboro;
+  background-color: #9ca3af;
   user-select: none;
 }

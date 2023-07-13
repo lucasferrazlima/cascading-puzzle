@@ -9,7 +9,7 @@ const GameBoard = () => {
   const board = useSelector((state: RootState) => state.game.gameBoard);
 
   return (
-    <div className='w-96 h-80 grid grid-cols-6 grid-rows-6 justify-items-center content-center'>
+    <div className='w-[500px] h-[500px] grid grid-cols-8 grid-rows-8 justify-items-center content-center'>
       {board.map((col, colIndex) => (
         // wrapper needed to place dots inside grid cells
         <React.Fragment key={colIndex}>

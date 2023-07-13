@@ -48,8 +48,20 @@ const Dot = ({ dot }: DotProps) => {
       onMouseDown={handleMouseDown}
       onMouseOver={handleSelect}
       onMouseUp={handleMouseUp}
-      className={`w-6 h-6 rounded-full m-2 hover:opacity-75 transition duration-150 ease-in-out hover:shadow-lg hover:scale-110 ${
-        selectedDots.some((selectedDot) => selectedDot === dot) ? 'opacity-50' : ''
+      className={`w-6 h-6 my-4 rounded-full hover:opacity-75 transition duration-150 ease-in-out hover:shadow-lg hover:scale-110 ${
+        selectedDots.some((selectedDot) => selectedDot === dot) ? 
+          dot?.color === '#acd8aa' ? 
+          'ring-2 ring-lime-400 ring-offset-4 ring-offset-gray-400' : 
+          dot?.color === '#ffadad' ? 
+          'ring-2 ring-red-300 ring-offset-4 ring-offset-gray-400' :
+          dot?.color === '#fdffb6' ? 
+          'ring-2 ring-yellow-200 ring-offset-4 ring-offset-gray-400' :
+          dot?.color === '#bdb2ff' ? 
+          'ring-2 ring-violet-300 ring-offset-4 ring-offset-gray-400' :
+          dot?.color === '#a0c4ff' ? 
+          'ring-2 ring-blue-300 ring-offset-4 ring-offset-gray-400' :
+          ''
+         : ''
       }`}
     >
     </div>

@@ -8,14 +8,14 @@ import { generateColor } from "../utils/generateColors";
 import handleCascadingEffect from "../utils/cascadingEffect";
 import refillBoard from "../utils/refillBoard";
 
-const colors = ['red', 'green', 'yellow', 'purple', 'blue'];
+const colors = ['#ffadad', '#acd8aa', '#fdffb6', '#bdb2ff', '#a0c4ff'];
 
 const initialBoard: (DotType | null)[][] = [];
 
 if (typeof window !== 'undefined') {
-    for (let colIndex = 0; colIndex < 6; colIndex++) {
+    for (let colIndex = 0; colIndex < 8; colIndex++) {
         const row: DotType[] = [];
-        for (let rowIndex = 0; rowIndex < 6; rowIndex++) {
+        for (let rowIndex = 0; rowIndex < 8; rowIndex++) {
             const dot: DotType = {
                 color: generateColor(colors),
                 position: {
@@ -60,7 +60,19 @@ const gameSlice = createSlice({
         },
         resolveSelectedDots: (state, action: PayloadAction<DotType[]>) => {
             const eliminatedDots: DotType[] = action.payload;
-            const addScore = eliminatedDots.length * 2;
+            
+            const addScore = (eliminatedDots: DotType[]): number => {
+                const arrayLength = eliminatedDots.length;
+
+                if (arrayLength <= 4) {
+                    return arrayLength * 2;
+                } else if (arrayLength <= 10) {
+                    return arrayLength * 4;
+                } else {
+                    return arrayLength * 10;
+                }
+            };
+
 
             const newGameBoard: (DotType | null)[][] = state.gameBoard.map((row) => {
                 return row.map((dot) => {
@@ -82,7 +94,7 @@ const gameSlice = createSlice({
             return {
                 ...state,
                 gameBoard: refilledGameboard,
-                score: state.score + addScore,
+                score: state.score + addScore(eliminatedDots),
                 selectedDots: [],
             };
         }   
