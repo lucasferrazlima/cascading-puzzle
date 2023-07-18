@@ -8,7 +8,7 @@ import { generateColor } from "../utils/generateColors";
 import handleCascadingEffect from "../utils/cascadingEffect";
 import refillBoard from "../utils/refillBoard";
 
-const colors = ['#ffadad', '#acd8aa', '#fdffb6', '#bdb2ff', '#a0c4ff'];
+const colors = ['#8AB6D6', '#A4D9B2', '#E8B3C7', '#BFA9D6', '#FFC89E'];
 
 const initialBoard: (DotType | null)[][] = [];
 

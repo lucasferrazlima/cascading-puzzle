@@ -67,16 +67,16 @@ const Dot = ({ dot }: DotProps) => {
       onMouseUp={handleMouseUp}
       className={`w-6 h-6 my-4 rounded-full hover:opacity-75 transition duration-150 ease-in-out hover:shadow-lg hover:scale-110 ${
         selectedDots.some((selectedDot) => selectedDot === dot) ? 
-          dot?.color === '#acd8aa' ? 
-          'ring-2 ring-lime-400 ring-offset-4 ring-offset-gray-400' : 
-          dot?.color === '#ffadad' ? 
-          'ring-2 ring-red-300 ring-offset-4 ring-offset-gray-400' :
-          dot?.color === '#fdffb6' ? 
-          'ring-2 ring-yellow-200 ring-offset-4 ring-offset-gray-400' :
-          dot?.color === '#bdb2ff' ? 
-          'ring-2 ring-violet-300 ring-offset-4 ring-offset-gray-400' :
-          dot?.color === '#a0c4ff' ? 
-          'ring-2 ring-blue-300 ring-offset-4 ring-offset-gray-400' :
+        dot?.color === '#8AB6D6' ? 
+        'ring-2 ring-blue-300 ring-offset-4 ring-offset-background' : 
+        dot?.color === '#A4D9B2' ? 
+        'ring-2 ring-green-400 ring-offset-4 ring-offset-background' :
+        dot?.color === '#E8B3C7' ? 
+        'ring-2 ring-pink-300 ring-offset-4 ring-offset-background' :
+        dot?.color === '#BFA9D6' ? 
+        'ring-2 ring-purple-300 ring-offset-4 ring-offset-background' :
+        dot?.color === '#FFC89E' ? 
+        'ring-2 ring-orange-300 ring-offset-4 ring-offset-background' :
           ''
          : ''
       }`}

@@ -1,7 +1,8 @@
 import { Dot as DotType } from "../store/types";
 import { generateColor } from "./generateColors";
 
-const colors = ['#ffadad', '#acd8aa', '#fdffb6', '#bdb2ff', '#a0c4ff'];
+const colors = ['#8AB6D6', '#A4D9B2', '#E8B3C7', '#BFA9D6', '#FFC89E'];
+
 
 export default function refillBoard(gameBoard: (DotType | null)[][]): (DotType | null)[][] {
   const columnsCount = gameBoard.length;
