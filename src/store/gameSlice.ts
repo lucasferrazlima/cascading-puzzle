@@ -52,6 +52,13 @@ const gameSlice = createSlice({
                 selectedDots: [...state.selectedDots, dot],
             };
         },
+        selectManyDots: (state, action: PayloadAction<DotType[]>) => {
+            const dots: DotType[] = action.payload;
+            return {
+                ...state,
+                selectedDots: [...state.selectedDots, ...dots],
+            };
+        },
         resetSelectedDots: (state) => {
             return {
                 ...state,

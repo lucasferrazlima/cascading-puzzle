@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { actions } from '../store/gameSlice';
 import { Dot as DotType } from '../store/types';
+import checkForSquare from '../utils/checkForSquare';
+import { flatten } from 'lodash'
 
 interface DotProps {
   dot: DotType | null;
@@ -11,6 +13,7 @@ interface DotProps {
 const Dot = ({ dot }: DotProps) => {
   const dispatch = useDispatch();
   const selectedDots = useSelector((state: RootState) => state.game.selectedDots);
+  const allDots = useSelector((state: RootState) => state.game.gameBoard);
   const lastDot = selectedDots[selectedDots.length - 1];
 
   const handleMouseDown = () => {
@@ -20,7 +23,11 @@ const Dot = ({ dot }: DotProps) => {
   };
 
   const handleSelect = () => {
-    if (selectedDots.length > 0 && dot) {
+    if (
+      selectedDots.length > 0 && 
+      dot &&
+      selectedDots.every((selectedDot) => selectedDot !== dot) // Check if the dot is not already selected) 
+    ) {
       if (
         lastDot.color === dot.color &&
         ((Math.abs(lastDot.position.rowIndex - dot.position.rowIndex) === 0 &&
@@ -31,6 +38,16 @@ const Dot = ({ dot }: DotProps) => {
         dispatch(actions.selectDot(dot));
       }
     }
+
+    if (checkForSquare(selectedDots)) {
+
+      // get every dot of same color
+      const dotsOfSameColor = flatten(allDots).filter((dot) => dot.color === lastDot.color);
+
+      dispatch(actions.selectManyDots(dotsOfSameColor))
+    }
+
+    
   };
 
   const handleMouseUp = () => {
