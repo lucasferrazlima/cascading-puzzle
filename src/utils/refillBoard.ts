@@ -1,7 +1,13 @@
 import { Dot as DotType } from "../store/types";
 import { generateColor } from "./generateColors";
 
-const colors = ['#8AB6D6', '#A4D9B2', '#E8B3C7', '#BFA9D6', '#FFC89E'];
+const colors = [
+  '#8AB6D6', // Pastel Blue
+  '#A4D9B2', // Pastel Green
+  '#E8B3C7', // Pastel Pink
+  '#BFA9D6', // Pastel Purple
+  '#FFC89E', // Pastel Orange
+];
 
 
 export default function refillBoard(gameBoard: (DotType | null)[][]): (DotType | null)[][] {

@@ -6,7 +6,6 @@ import ScoreBoard from '../components/ScoreBoard';
 export default function Home() {
   return (
     <Providers>
-      <h1 >Game Board</h1>
       <ScoreBoard />
       <GameBoard />
     </Providers>

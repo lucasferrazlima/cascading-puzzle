@@ -15,9 +15,11 @@ const Dot = ({ dot }: DotProps) => {
   const selectedDots = useSelector((state: RootState) => state.game.selectedDots);
   const allDots = useSelector((state: RootState) => state.game.gameBoard);
   const lastDot = selectedDots[selectedDots.length - 1];
+  const isGameOver = useSelector((state: RootState) => state.game.isGameOver);
 
+  
   const handleMouseDown = () => {
-    if (selectedDots.length === 0 && dot) {
+    if (selectedDots.length === 0 && dot && !isGameOver) {
       dispatch(actions.selectDot(dot));
     }
   };
@@ -26,8 +28,9 @@ const Dot = ({ dot }: DotProps) => {
     if (
       selectedDots.length > 0 && 
       dot &&
-      selectedDots.every((selectedDot) => selectedDot !== dot) // Check if the dot is not already selected) 
-    ) {
+      selectedDots.every((selectedDot) => selectedDot !== dot) && // Check if the dot is not already selected) 
+      !isGameOver
+      ) {
       if (
         lastDot.color === dot.color &&
         ((Math.abs(lastDot.position.rowIndex - dot.position.rowIndex) === 0 &&
@@ -51,10 +54,11 @@ const Dot = ({ dot }: DotProps) => {
   };
 
   const handleMouseUp = () => {
-    if (selectedDots.length <= 1) {
+    if (selectedDots.length <= 1 && !isGameOver) {
       dispatch(actions.resetSelectedDots());
     } else {
       dispatch(actions.resolveSelectedDots(selectedDots));
+      dispatch(actions.checkGameOver());
     }
   };
 
