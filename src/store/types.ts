@@ -10,7 +10,6 @@ export interface Dot {
 
 export interface GameState {
     gameBoard: (Dot | null)[][];
-    score: number;
     isGameStarted: boolean;
     isGameOver: boolean;
     selectedDots: Dot[];
@@ -22,6 +21,7 @@ export interface GameState {
         purpleDots: number;
         orangeDots: number;
     };
+    
 }
 
 

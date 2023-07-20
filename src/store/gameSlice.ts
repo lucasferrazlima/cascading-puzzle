@@ -78,7 +78,6 @@ const getRandomEndGameParams = () => {
 
 const initialState: GameState = {
     gameBoard: initialBoard,
-    score: 0,
     isGameStarted: false,
     isGameOver: false,
     selectedDots: [],
@@ -127,20 +126,6 @@ const gameSlice = createSlice({
 
             const colorKey = colorKeyMap[eliminatedDotsColor];
 
-
-            const addScore = (eliminatedDots: DotType[]): number => {
-                const arrayLength = eliminatedDots.length;
-
-                if (arrayLength <= 4) {
-                    return arrayLength * 2;
-                } else if (arrayLength <= 10) {
-                    return arrayLength * 4;
-                } else {
-                    return arrayLength * 10;
-                }
-            };
-
-
             const newGameBoard: (DotType | null)[][] = state.gameBoard.map((row) => {
                 return row.map((dot) => {
                   const eliminatedDot = eliminatedDots.find(
@@ -160,7 +145,6 @@ const gameSlice = createSlice({
             return {
                 ...state,
                 gameBoard: refilledGameboard,
-                score: state.score + addScore(eliminatedDots),
                 selectedDots: [],
                 endGameParams: {
                     ...state.endGameParams,
