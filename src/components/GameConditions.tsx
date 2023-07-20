@@ -14,18 +14,18 @@ const GameConditions = () => {
     if (typeof window === 'undefined') return null
 
     return (
-        <div className='flex z-10 h-16 font-poppins'>
-            <div className='flex flex-col w-1/6 text-white justify-center bg-primary rounded-tl-3xl  '>
+        <div className='flex z-10 h-16 font-poppins bg-primary rounded-t-3xl'>
+            <div className='flex flex-col w-1/6 text-black justify-center bg-primary rounded-tl-3xl  '>
                 <span className='self-center text-sm'>
                     Rounds
                 </span>
-                <div className='self-center font-bold'>
+                <div className='self-center'>
                     {endGameParams.rounds}
                 </div>
 
             </div>
 
-            <div className='flex flex-1 text-white bg-secondary justify-evenly'>
+            <div className='flex flex-1 text-black bg-secondary justify-evenly rounded-3xl h-4/5 self-center'>
                 {endGameParams.blueDots > 0 && 
                 <div className='flex flex-col self-center '>
                     <div 
@@ -82,7 +82,7 @@ const GameConditions = () => {
                 </div>
                 }
             </div>
-            <div className='flex w-1/6 text-white justify-center bg-primary rounded-tr-3xl '>
+            <div className='flex w-1/6 text-black justify-center bg-primary rounded-tr-3xl '>
                 <RestartAltIcon className='self-center hover:cursor-pointer hover:animate-pulse' style={{ fontSize: '2rem' }}/>
             </div>
         </div>

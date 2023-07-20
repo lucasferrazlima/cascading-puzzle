@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <Providers>
       <div className='flex flex-col h-screen w-[500px] mx-auto  self-center justify-center'>
-        <Image src={logo} alt="logo" width={200} height={20} className='mx-auto mb-2'/>
+        <Image src={logo} alt="logo" width={150} className='mx-auto mb-2'/>
         <GameConditions />
         <GameBoard />
       </div>
